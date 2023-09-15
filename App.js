@@ -1,10 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View,   } from 'react-native';
 
 export default function App() {
   return (
+
+   
+
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text style={styles.hello} >hello   </Text>
+      <Text>xin chào tôi là khắc thắng</Text>
+
+      <Text style={styles.instructions}> 
+       Double tap R on your keyboard to reload,{'\n'}
+       Shake or press menu button for dev menu
+       </Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -16,5 +25,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
+
+  hello: {
+      textAlign: 'center',
+      fontSize: 20,
+      margin: 10,
+      color: 'red',
+      
+      
+  },
+
+  instructions:{
+    textAlign: 'center',
+      
+      margin: 10,
+
+  }
 });
