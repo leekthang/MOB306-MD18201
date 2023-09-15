@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
 
   hello: {
       textAlign: 'center',
-      fontSize: 20,
-      margin: 10,
+      fontSize: 30,
+      margin: 12,
       color: 'red',
       
       
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   instructions:{
     textAlign: 'center',
       
-      margin: 10,
+      margin: 12,
 
   }
 });
