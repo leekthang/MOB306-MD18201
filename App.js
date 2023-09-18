@@ -1,46 +1,103 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,   } from 'react-native';
+import { Component } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import MyTextComp from './MyTextComp';
 
-export default function App() {
-  return (
+class HomePage extends Component {
 
-   
+  state = {
 
-    <View style={styles.container}>
-      <Text style={styles.hello} >hello   </Text>
-      <Text>xin chào tôi là khắc thắng</Text>
-
-      <Text style={styles.instructions}> 
-       Double tap R on your keyboard to reload,{'\n'}
-       Shake or press menu button for dev menu
-       </Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    
-  },
-
-  hello: {
-      textAlign: 'center',
-      fontSize: 30,
-      margin: 12,
-      color: 'red',
-      
-      
-  },
-
-  instructions:{
-    textAlign: 'center',
-      
-      margin: 12,
+    myState: 'Trang thai 1'
 
   }
+
+  updateText = () => {
+    if (this.state.myState == 'Trang thai 1') {
+      this.setState({ myState: 'Trang thai 2' })
+    } else {
+      this.setState({ myState: 'Trang thai 1' })
+    }
+    
+  }
+
+
+  render() { 
+
+    return (
+      <View style={styles.container} >
+        <Text style={styles.heading}>Tieu de</Text>
+        <Text style={styles.text}>Doan van ban</Text>
+        <Text style={styles.subTitle}>{this.state.myState}</Text>
+         
+
+
+        <Button
+          onPress={this.updateText}
+          title="Click me!"
+          color="#841584"
+        />
+
+        <MyTextComp noidungText='sử dụng props'/>
+
+        <MyTextComp noidungText='code buoi 4'/>
+
+        <View style={styles.horizontalView}>
+
+<View style={[styles.redbox , styles.blackbox]} />
+<View style={styles.bluebox} />
+<View style={styles.blackbox} />
+</View>
+
+
+        <StatusBar style="auto" />
+      </View>
+    );
+  }
+
+}
+
+
+const styles = StyleSheet.create({
+  horizontalView: {
+    flexDirection: 'row',
+    marginTop: 20
+  },
+  container: {
+    padding: 10,
+    height: '100%',
+    flexDirection: 'column',
+    backgroundColor: '#fff000',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  redbox: {
+    flex: 1,
+    height: 100,
+    backgroundColor: 'red'
+  },
+  bluebox: {
+    flex: 2,
+    height: 100,
+    backgroundColor: 'blue'
+  },
+  blackbox: {
+    flex: 1,
+    height: 100,
+    backgroundColor: 'black'
+  },
+  heading: {
+    color: '#ffffff',
+    fontSize: 60
+  },
+  text: {
+    fontSize: 40
+  },
+  subTitle: {
+    fontSize: 30,
+    color: '#dd0000'
+  }
 });
+
+
+export default HomePage;
+
