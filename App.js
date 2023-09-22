@@ -1,103 +1,126 @@
-import { StatusBar } from 'expo-status-bar';
-import { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import MyTextComp from './MyTextComp';
+import React, { useState } from "react";
+import {
+  Button,
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  View,
+  Math,
+  ScrollView,
+  TextInput,
+} from "react-native";
 
-class HomePage extends Component {
+let i = 0;
+let email, pass;
 
-  state = {
+const FlatListBasics = () => {
+  console.log("re-render " + ++i);
+  const [listNV, setListNV] = useState([
+    { name: "Devin", phone: 113 },
+    { name: "Dan", phone: 114 },
+    { name: "Dominic", phone: 113 },
+    { name: "Jackson", phone: 115 },
+    { name: "James", phone: 113 },
+    { name: "Joel", phone: 112 },
+    { name: "John", phone: 113 },
+    { name: "Jillian", phone: 115 },
+    { name: "Jimmy", phone: 113 },
+    { name: "Julie", phone: 911 },
+  ]);
+  //var [email, onChangeEmail] = React.useState('');
+  //var [pass, onChangePass] = React.useState('');
+  return (
+    <SafeAreaView>
+      <FlatList
+        style={styles.container}
+        data={listNV}
+        extraData={listNV}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() => {
+              alert(item.name + "--" + item.phone);
+            }}
+          >
+            <View style={{ flexDirection: "row", backgroundColor: "yellow" }}>
+              <Text style={styles.item}>{item.name}</Text>
+              <Text style={styles.item}>{item.phone}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      />
 
-    myState: 'Trang thai 1'
-
-  }
-
-  updateText = () => {
-    if (this.state.myState == 'Trang thai 1') {
-      this.setState({ myState: 'Trang thai 2' })
-    } else {
-      this.setState({ myState: 'Trang thai 1' })
-    }
-    
-  }
-
-
-  render() { 
-
-    return (
-      <View style={styles.container} >
-        <Text style={styles.heading}>Tieu de</Text>
-        <Text style={styles.text}>Doan van ban</Text>
-        <Text style={styles.subTitle}>{this.state.myState}</Text>
-         
-
-
+      <View
+        style={{
+          flexDirection: "row",
+          height: "10%",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginHorizontal: 50,
+        }}
+      >
         <Button
-          onPress={this.updateText}
-          title="Click me!"
-          color="#841584"
+          title="Add"
+          onPress={() => {
+            listNV.push({ name: "khai", phone: 111 });
+            setListNV([...listNV]);
+          }}
         />
-
-        <MyTextComp noidungText='sử dụng props'/>
-
-        <MyTextComp noidungText='code buoi 4'/>
-
-        <View style={styles.horizontalView}>
-
-<View style={[styles.redbox , styles.blackbox]} />
-<View style={styles.bluebox} />
-<View style={styles.blackbox} />
-</View>
-
-
-        <StatusBar style="auto" />
+        <Button
+          title="Delete"
+          onPress={() => {
+            listNV.splice(0, 1);
+            setListNV([...listNV]);
+          }}
+        />
       </View>
-    );
-  }
-
-}
-
-
+      <TextInput
+        style={styles.input}
+        placeholder="nhap email"
+        onChangeText={(value) => {
+          email = value;
+        }}
+        value={email}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={(value) => {
+          pass = value;
+        }}
+        value={pass}
+        placeholder="passWord"
+        secureTextEntry={true}
+      />
+      <View style={{ marginHorizontal: 120 }}>
+        <Button
+          title="Submit"
+          onPress={() => {
+            alert("Email: " + email + "\nPass:" + pass);
+            // onChangeEmail(''), onChangePass('')
+          }}
+        />
+      </View>
+    </SafeAreaView>
+  );
+};
 const styles = StyleSheet.create({
-  horizontalView: {
-    flexDirection: 'row',
-    marginTop: 20
-  },
   container: {
+    height: "50%",
+    marginTop: 20,
     padding: 10,
-    height: '100%',
-    flexDirection: 'column',
-    backgroundColor: '#fff000',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  redbox: {
-    flex: 1,
-    height: 100,
-    backgroundColor: 'red'
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
   },
-  bluebox: {
-    flex: 2,
-    height: 100,
-    backgroundColor: 'blue'
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
   },
-  blackbox: {
-    flex: 1,
-    height: 100,
-    backgroundColor: 'black'
-  },
-  heading: {
-    color: '#ffffff',
-    fontSize: 60
-  },
-  text: {
-    fontSize: 40
-  },
-  subTitle: {
-    fontSize: 30,
-    color: '#dd0000'
-  }
 });
-
-
-export default HomePage;
-
+export default FlatListBasics;
